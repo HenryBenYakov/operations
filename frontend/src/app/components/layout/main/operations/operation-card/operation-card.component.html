@@ -1,0 +1,14 @@
+<div class="card">
+  <div class="cardText">
+    <h2>{{ operation.type }}</h2>
+    <p>Account Number: {{ operation.accountNumber }}</p>
+    <p>amount: {{ operation.amount | currency: "USD" }}</p>
+    <p>date: {{ formatDate(operation.date) }}</p>
+    <p *ngIf="operation.interest && operation.interest > 0">
+      interest: {{ operation.interest }}%
+    </p>
+    <p *ngIf="operation.payments && operation.payments > 0">
+      payments: {{ operation.payments }}
+    </p>
+  </div>
+</div>

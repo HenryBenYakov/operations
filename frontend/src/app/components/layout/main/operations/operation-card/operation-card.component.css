@@ -1,0 +1,49 @@
+.card {
+  display: grid;
+  border-radius: 18px;
+  background: white;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);
+  font-family: roboto;
+}
+
+.cardImage {
+  grid-area: image;
+  text-align: right;
+}
+.cardText {
+  grid-area: text;
+}
+.cardStats {
+  grid-area: stats;
+}
+
+.cardImage {
+  grid-area: image;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  background-size: cover;
+}
+
+.cardText {
+  grid-area: text;
+  margin: 25px;
+}
+
+.cardText p {
+  color: grey;
+  font-size: 15px;
+  font-weight: 300;
+}
+.cardText h2 {
+  margin-top: 0px;
+  font-size: 28px;
+}
+
+.cardAction {
+  grid-area: stats;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}

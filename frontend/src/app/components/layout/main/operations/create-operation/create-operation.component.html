@@ -1,0 +1,97 @@
+<form [formGroup]="operationForm" (ngSubmit)="save()" id="msform">
+  <fieldset>
+    <h2 class="fs-title">Create new Vacation</h2>
+    <label for="accountNumber">Account Number: </label>
+    <input id="accountNumber" type="number" formControlName="accountNumber" />
+    <div
+      *ngIf="
+        accountNumber?.invalid &&
+        (accountNumber?.dirty || accountNumber?.touched)
+      "
+      class="alert"
+    >
+      <div *ngIf="accountNumber?.errors?.['required']">
+        Account Number is required.
+      </div>
+      <div *ngIf="accountNumber?.errors?.['minlength']">
+        Account Number must be at least 4 characters long.
+      </div>
+    </div>
+
+    <label for="Type">Type: </label>
+
+    <select
+      (ngModelChange)="onTypeChange($event)"
+      id="type"
+      type="select"
+      formControlName="type"
+    >
+      <option disabled selected value="">select operation type</option>
+      <option id="withdrawal" value="withdrawal">withdrawal</option>
+      <option id="deposit" value="deposit">deposit</option>
+      <option id="loan" value="loan">loan</option>
+    </select>
+
+    <div *ngIf="type?.invalid && (type?.dirty || type?.touched)" class="alert">
+      <div *ngIf="type?.errors?.['required']">type is required.</div>
+    </div>
+
+    <label for="amount">Amount: </label>
+    <input id="amount" type="Amount" step="0.01" formControlName="amount" />
+    <div
+      *ngIf="amount?.invalid && (amount?.dirty || amount?.touched)"
+      class="alert"
+    >
+      <div *ngIf="amount?.errors?.['required']">Amount is required.</div>
+      <div *ngIf="amount?.errors?.['min']">Amount must be at least 1.</div>
+      <div *ngIf="amount?.errors?.['max']">
+        Amount must be at least 2000000.
+      </div>
+    </div>
+
+    <label for="date">Date: </label>
+    <input id="date" formControlName="date" type="date" />
+
+    <div *ngIf="date?.invalid && (date?.dirty || date?.touched)" class="alert">
+      <div *ngIf="date?.errors?.['required']">date is required.</div>
+      <div *ngIf="date?.errors?.['minlength']">date is required</div>
+    </div>
+
+    <div *ngIf="selectedType === 'loan'">
+      <label for="interest">interest: </label>
+      <input
+        id="interest"
+        type="number"
+        step="0.01"
+        formControlName="interest"
+      />
+      <div *ngIf="loanFieldsValidateOnSubmit" class="alert">
+        interest is required between 1 and 80
+      </div>
+
+      <label for="payments">payments: </label>
+      <input
+        id="payments"
+        type="number"
+        step="0.01"
+        formControlName="payments"
+      />
+      <div *ngIf="loanFieldsValidateOnSubmit" class="alert">
+        payments is required between 1 and 36
+      </div>
+    </div>
+
+    <div class="modalActions">
+      <div class="actionsContainer">
+        <button
+          type="submit"
+          [disabled]="operationForm.invalid"
+          name="next"
+          [class]="operationForm.invalid ? 'btn-disabled' : 'confirmBtn'"
+        >
+          save
+        </button>
+      </div>
+    </div>
+  </fieldset>
+</form>

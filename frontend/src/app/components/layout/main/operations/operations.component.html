@@ -1,0 +1,50 @@
+<div class="actionsContainer">
+  <a routerLink="/create-operation"
+    ><button class="button-29">New Operation</button></a
+  >
+
+  <form
+    [formGroup]="getOperationsForm"
+    (ngSubmit)="onGetOperationsClick()"
+    id="msform"
+  >
+    <input
+      id="accountNumber"
+      type="number"
+      formControlName="accountNumber"
+      placeholder="Account Number"
+    />
+    <div
+      *ngIf="
+        accountNumber?.invalid &&
+        (accountNumber?.dirty || accountNumber?.touched)
+      "
+      class="alert"
+    >
+      <div *ngIf="accountNumber?.errors?.['required']">
+        Account Number is required.
+      </div>
+    </div>
+
+    <div class="modalActions">
+      <div class="actionsContainer">
+        <button
+          type="submit"
+          [disabled]="getOperationsForm.invalid"
+          name="next"
+          [class]="getOperationsForm.invalid ? 'btn-disabled' : 'confirmBtn'"
+        >
+          Get Operations
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="cardContainer">
+  <app-operation-card
+    *ngFor="let o of operations?.slice()?.reverse()"
+    [operation]="o"
+    ><div></div
+  ></app-operation-card>
+</div>
